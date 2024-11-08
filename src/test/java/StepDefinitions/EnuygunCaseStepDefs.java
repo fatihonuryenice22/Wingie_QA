@@ -34,8 +34,10 @@ public class EnuygunCaseStepDefs {
     @Given("{string} , {string} Parametreleri ile Arama Yapmaya Başlar")
     public void parametreleriIleAramaYapmayaBaşlar(String kalkis, String varis) {
         mainPage.gidisSecenegiSecimi();
+        //Parametrik olarak aldığımız kalkış lokasyonunu burada yazıyoruz
         driver.findElement(By.xpath("//input[@name='origin']")).sendKeys(kalkis);
         mainPage.ilkElemanSecilir();
+        //Parametrik olarak aldığımız varış lokasyonunu burada yazıyoruz
         driver.findElement(By.xpath("//input[@name='destination']")).sendKeys(varis);
         mainPage.varisIlkElemanSecilir();
 

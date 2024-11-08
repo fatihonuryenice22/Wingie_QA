@@ -37,8 +37,6 @@ public class FlightSearchPage {
     By ilkpaket=By.xpath("/html[1]/body[1]/div[3]/div[4]/div[2]/div[2]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[6]/div[1]/div[1]");
     By iletisimBilgileri=By.xpath("//div[contains(text(),'İletişim Bilgileri')]");
     By epostaadresi=By.xpath("//input[@name='contactEmail']");
-    By contactTelefonNo=By.xpath("//input[@name='contactMobile']");
-    By rizaMetniCheckBox=By.xpath("//label[@for='acceptEmails']//span[@class='custom-control-indicator']");
     By yetiskin=By.xpath("//span[@class='passenger-translate']");
     By ad=By.xpath("(//input[@name='firstName_0'])[1]");
     By soyad=By.xpath("//input[@id='lastName_0']");
@@ -65,6 +63,8 @@ public class FlightSearchPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        //Girilen Parametrik Gidiş Tarihi değerleri parçalanır ve Butonun içine değişken olarak atanır
+        //Selenyum çok hızlı tıklama yaptığı için websitesi hızına ayak uydurabilmesi için try catch metodu içinde delaylar eklendi
         DateTimeFormatter formatlayici = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate tarih = LocalDate.parse(hedefTarih, formatlayici);
         String ayString = String.format("%02d", tarih.getMonthValue());
@@ -102,6 +102,8 @@ public class FlightSearchPage {
     }
     public void donustarihsecimi(String donusgun) {
         elementHelper.click(donustakvim);
+        //Girilen Parametrik Dönüş Tarihi değerleri parçalanır ve Butonun içine değişken olarak Atanır
+        //Selenyum çok hızlı tıklama yaptığı için websitesi hızına ayak uydurabilmesi için try catch metodu içinde delaylar eklendi
         DateTimeFormatter formatlayici = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate tarih = LocalDate.parse(donusgun, formatlayici);
         String ayString = String.format("%02d", tarih.getMonthValue());
@@ -153,6 +155,7 @@ public class FlightSearchPage {
         elementHelper.click(gidiskalkisSaatleri);
         elementHelper.findElement(slider);
         elementHelper.findElement(slidervaris);
+        //Varış saatindeki Sliderlar soldaki yavaş yavaş sağa kayarak 10:00 değerini arıyor sağdaki yavaş yavaş sola kayarak 18:00 saatini arıyor
         WebElement timeDisplay = driver.findElement(By.xpath("//div[contains(text(),'00:00 ile 23:59 arası')]"));
         WebElement slider = driver.findElement(By.xpath("//div[contains(@class,'search__filter_departure')]//div[4]")); // Soldaki Varış
         WebElement slider2= driver.findElement(By.xpath("//div[contains(@class,'search__filter_departure')]//div[5]")); // Sağdaki Varış
@@ -186,6 +189,7 @@ public class FlightSearchPage {
     }
 
     public boolean ucusListesiKontrol() {
+        //Kalkış saatlerini filtreleyerek kalkışsaatleri listesindeki tüm saatlerin istenen aralıkta olup olmadığını kontrol ediyor
         List<WebElement> kalkisSaatleri = driver.findElements(By.className("flight-departure-time"));
         LocalTime startTime = LocalTime.parse("10:00", DateTimeFormatter.ofPattern("HH:mm"));
         LocalTime endTime = LocalTime.parse("18:00", DateTimeFormatter.ofPattern("HH:mm"));
@@ -205,6 +209,7 @@ public class FlightSearchPage {
     }
 
     public void yolcusayisiveucaksecimi(int yetiskinsayisi, int cocuksayisi, int bebeksayisi, String ucaktipi) {
+        //Parametrik olarak girilen yetiskin sayısı cocuk sayısı bebek sayısı ve ucaktipi degerlerini alıyor ve yolcu sayısını düzeltiyor
         elementHelper.click(yolcusayisibutonu);
         for (int i = 1; i < yetiskinsayisi; i++) {
             elementHelper.click(yetiskinarttirmabutonu);
@@ -253,6 +258,7 @@ WebElement ucaktipibutonu=driver.findElement(By.xpath("//span[normalize-space()=
         elementHelper.click(tamambutonu);
     }
     public void listelenenucusfiyatkontrolü() {
+        //İlk fiyattan başlayıp ikili gruplar halinde bir bir kontrol ediyor böylece tüm fiyatların küçükten büyüğe sıralandığı görülüyor
         List<WebElement> fiyatElementleri = driver.findElements(By.className("money-decimal"));
         double oncekiFiyat = Double.MIN_VALUE;
         for (WebElement fiyatElementi : fiyatElementleri) {
@@ -272,6 +278,7 @@ WebElement ucaktipibutonu=driver.findElement(By.xpath("//span[normalize-space()=
         }
     }
     public void havayolusirketisecimi() {
+        //Thy seçeneği bulunup tıklanıyor
         elementHelper.findElement(havayollarısecenegi);
         try {
             Thread.sleep(200);

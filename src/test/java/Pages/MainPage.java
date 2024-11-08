@@ -20,6 +20,7 @@ public class MainPage {
         this.elementHelper = new ElementHelper(driver);
     }
     public void gidisSecenegiSecimi() {
+        //Bu adım 3 Casemisde de ortak olduğu için çerezleri burada kabul ediyoruz
         elementHelper.click(cerezleriKabulEt);
         try {
             Thread.sleep(1000);
