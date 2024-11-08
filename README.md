@@ -30,6 +30,7 @@ Projeyi çalıştırmak için aşağıdaki adımları takip edebilirsiniz.
 - Java JDK 8 veya üzeri
 - Maven 3.6 veya üzeri
 - IDE (IntelliJ IDEA, Eclipse vb.)
+- Allure CLI
 
 ### Adımlar
 
@@ -73,9 +74,23 @@ Feature: Wingie Uygulaması Üzerinde Uçuş Arama
 ```
 
 ## Raporlama
+Bu projede test sonuçlarını görselleştirmek ve analiz etmek için **Allure** raporlama aracı kullanılmaktadır. Allure, testlerin durumu, başarı oranları, hatalar ve uyarılar gibi detayları kullanıcı dostu bir formatta sunar. Bu sayede test süreçleri daha anlaşılır hale gelir ve hata tespiti kolaylaşır.
 
+### Neden Allure Kullanıyoruz?
 
+Allure, aşağıdaki avantajları sunduğu için tercih edilmektedir:
 
+1. **Görsel ve Detaylı Raporlar**: Test adımlarının başarı, başarısızlık ve diğer durumlarını görsel olarak ayırt eder ve detaylı sonuçlar sunar.
+2. **Adım Adım Test Detayları**: Her bir test adımının süresini ve sonucunu gösterir, böylece hataların hangi adımda gerçekleştiği kolayca anlaşılabilir.
+3. **Çoklu Entegrasyon Desteği**: Allure, TestNG, JUnit, Cucumber gibi birçok test çerçevesiyle uyumlu çalışır. Bu projede, **Cucumber ve TestNG** ile entegrasyonu yapılmıştır.
+4. **Kolay Kurulum ve Kullanım**: Allure, Maven aracılığıyla kolayca yapılandırılabilir ve test sonuçlarını otomatik olarak rapora dönüştürür.
+
+### Allure Nasıl Çalışır?
+
+Allure, testlerin çalıştırılması sırasında üretilen test sonuçlarını JSON veya XML formatında `target/allure-results` klasörüne kaydeder. Bu veriler daha sonra Allure tarafından işlenir ve HTML formatında bir rapora dönüştürülür.
+
+**Allure raporlarını görüntülemek için**:
+   ```bash
+   allure generate --single-file 
+   allure open 
 ---
-
-

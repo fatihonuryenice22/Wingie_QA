@@ -1,5 +1,8 @@
 <suite name="WGE_QA">
     <parameter name="browser" value="Chrome" />
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
+    </listeners>
     <test name="Cucumber">
         <classes>
             <class name="testRunners.runner"/>

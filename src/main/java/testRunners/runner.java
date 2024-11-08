@@ -10,7 +10,7 @@ import util.DriverFactory;
         glue = {"StepDefinitions","util"},
         tags = "",
         plugin = {
-                "summary","pretty","html:Reports/WQE_QA/Reports.html",
+                "summary","pretty","json:target/allure-results/Cucumber.json"
         }
 )
 
