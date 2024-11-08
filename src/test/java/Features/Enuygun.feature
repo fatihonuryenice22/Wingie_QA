@@ -1,5 +1,6 @@
 Feature: Enuygun Sitesi Kontrolleri
 
+  @Case1
   Scenario: İstanbul-Ankara arası gidiş dönüş uçuş araması ve saat kontrolü Case1
     Given "İstanbul" , "Ankara" Parametreleri ile Arama Yapmaya Başlar
     When Tarih bilgileri parametre olarak girilir "2024-12-19" "2024-12-25"
@@ -8,7 +9,7 @@ Feature: Enuygun Sitesi Kontrolleri
     When Kalkış saati filtresinde kalkış saatleri "10:00" ile "18:00" arası seçilir
     Then Tüm uçuşların kalkış saatleri 10:00 ile 18:00 arasında olmalıdır
 
-
+  @Case2
     Scenario: İstanbul-Ankara arası gidiş dönüş uçuş araması ve fiyat kontrolü Case2
       Given "İstanbul" , "Ankara" Parametreleri ile Arama Yapmaya Başlar
       When Tarih bilgileri parametre olarak girilir "2024-12-15" "2024-12-18"
@@ -18,7 +19,7 @@ Feature: Enuygun Sitesi Kontrolleri
       When Havayolu sirketi olarak Türk Hava Yolları seçilir
       Then Fiyatların küçükten büyüğe sıralandığı kontrol edilir
 
-
+@Case3
   Scenario: Kullanıcı başarılı bir şekilde yolcu bilgileri bölümüne gider ve formu doldurur
     Given "İstanbul" , "Ankara" Parametreleri ile Arama Yapmaya Başlar
     When Arama Butonuna Tıklanır

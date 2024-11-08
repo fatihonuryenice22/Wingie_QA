@@ -59,6 +59,12 @@ public class FlightSearchPage {
     public void gidistarihsecimi(String hedefTarih) {
         elementHelper.findElement(takvim);
         elementHelper.click(takvim);
+        try {
+            Thread.sleep(2000);
+            System.out.println("2 Saniye Bekliyoruz");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         DateTimeFormatter formatlayici = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate tarih = LocalDate.parse(hedefTarih, formatlayici);
         String ayString = String.format("%02d", tarih.getMonthValue());
