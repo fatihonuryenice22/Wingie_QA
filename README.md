@@ -40,7 +40,7 @@ Projeyi çalıştırmak için aşağıdaki adımları takip edebilirsiniz.
    ```
 2. Klonlanan dizine gidin:
    ```bash
-   cd Wingie_QA
+   cd <pom.xml yolu >
    ```
 3. Gerekli bağımlılıkları yükleyin:
    ```bash
@@ -59,7 +59,7 @@ Bu komut, tüm Cucumber senaryolarını TestNG ile çalıştıracaktır. Test so
 
 ### Test Senaryoları
 
-Tüm senaryolar `src/test/resources/features` klasöründe Gherkin dili ile yazılmıştır. Her senaryo kullanıcı hikayelerini ve uygulamanın doğru çalışmasını doğrulamak için özel olarak tasarlanmıştır.
+Tüm senaryolar `src/test/java/features` klasöründe Enuygun.feature dosyasında Gherkin dili ile yazılmıştır. Her senaryo kullanıcı hikayelerini ve uygulamanın doğru çalışmasını doğrulamak için özel olarak tasarlanmıştır.
 
 ### Örnek Senaryo
 
@@ -76,16 +76,7 @@ Feature: Wingie Uygulaması Üzerinde Uçuş Arama
 ## Raporlama
 Bu projede test sonuçlarını görselleştirmek ve analiz etmek için **Allure** raporlama aracı kullanılmaktadır. Allure, testlerin durumu, başarı oranları, hatalar ve uyarılar gibi detayları kullanıcı dostu bir formatta sunar. Bu sayede test süreçleri daha anlaşılır hale gelir ve hata tespiti kolaylaşır.
 
-### Neden Allure Kullanıyoruz?
-
-Allure, aşağıdaki avantajları sunduğu için tercih edilmektedir:
-
-1. **Görsel ve Detaylı Raporlar**: Test adımlarının başarı, başarısızlık ve diğer durumlarını görsel olarak ayırt eder ve detaylı sonuçlar sunar.
-2. **Adım Adım Test Detayları**: Her bir test adımının süresini ve sonucunu gösterir, böylece hataların hangi adımda gerçekleştiği kolayca anlaşılabilir.
-3. **Çoklu Entegrasyon Desteği**: Allure, TestNG, JUnit, Cucumber gibi birçok test çerçevesiyle uyumlu çalışır. Bu projede, **Cucumber ve TestNG** ile entegrasyonu yapılmıştır.
-4. **Kolay Kurulum ve Kullanım**: Allure, Maven aracılığıyla kolayca yapılandırılabilir ve test sonuçlarını otomatik olarak rapora dönüştürür.
-
-### Allure Nasıl Çalışır?
+### Allure Üzerinden Sonuçları Görmek 
 
 Allure, testlerin çalıştırılması sırasında üretilen test sonuçlarını JSON veya XML formatında `target/allure-results` klasörüne kaydeder. Bu veriler daha sonra Allure tarafından işlenir ve HTML formatında bir rapora dönüştürülür.
 
@@ -93,4 +84,20 @@ Allure, testlerin çalıştırılması sırasında üretilen test sonuçlarını
    ```bash
    allure generate --single-file 
    allure open 
----
+```
+
+### Proje Hakkında
+
+**Test Runner (src/main/java/testRunners)**:Bu sınıf, AbstractTestNGCucumberTests sınıfından miras alır, yani onun özelliklerini kullanabilir. Bu sınıf, TestNG ve Cucumber framework'lerini kullanarak test senaryolarını çalıştırmak için ayarlanmıştır.
+
+**DriverFactory (src/main/java/util)**:Bu sınıf testlerin çalışması için gerekli olan tarayıcıyı başlatır ve ayarları yapar.
+
+**ElementHelper (src/main/java/util)**:Bu sınıf, elementleri bulmak, tıklamak, metin göndermek ve görünürlüklerini kontrol etmek gibi sık kullanılan işlemleri kolaylaştırır.
+
+**Hooks (src/main/java/util)**:Cucumber testleri çalıştırılmadan önce ve sonra yapılacak işlemleri tanımlar. Test öncesi ve sonrası işlemleri otomatikleştirerek testlerin sorunsuz başlamasını ve kapanmasını sağlar.
+
+**ConfigReader (src/main/java/util)**:Bu sınıf, config.properties dosyasındaki yapılandırma ayarlarını okuyarak diğer sınıfların bu ayarlara erişimini sağlar.
+
+**TestNG (src/test/resources)**:Bu XML dosyası, testRunners.runner sınıfı üzerinden Cucumber testlerini çalıştırır, testlerin "Chrome" tarayıcısında yapılmasını sağlar ve Allure raporlarını oluşturmak için dinleyici ekler.
+
+**Diğer Elemanlar)**: .feautre dosyası src/main/java/Features paketinde Page classlarımız src/main/java/Pages paketinde StepDefinitionumuz src/main/java/StepDefinitions paketinde tutulmaktadır.
